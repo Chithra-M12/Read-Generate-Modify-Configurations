@@ -1,0 +1,7 @@
+variable "environment" {
+  default = "Development"
+}
+resource "aws_instance" "expression" {
+  ami           = "ami-00c39f71452c08778"
+  instance_type = var.environment == "Development" ? "t2.micro" : "m5.large"
+}
