@@ -1,0 +1,10 @@
+variable "environment" {
+  default = "Production"
+}
+variable "region" {
+  default = "us-east-1"
+}
+resource "aws_instance" "expression" {
+  ami           = "ami-00c39f71452c08778"
+  instance_type = var.environment == "Development" && var.region == "ap-south-1" ? "t2.micro" : "m5.large"
+}
