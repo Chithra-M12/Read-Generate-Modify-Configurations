@@ -1,0 +1,8 @@
+variable "instance_tags" {
+  type = map
+  default = {
+        Name = "App_server"
+        Environment = "Development"
+        Team = "Payments"
+  }
+}
