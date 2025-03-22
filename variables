@@ -1,0 +1,15 @@
+variable "vpn_ip" {
+  description = "This is VPN Server IP address"
+}
+
+variable "port1" {
+  description = "This is the port range for port1"
+}
+
+variable "port2" {
+  description = "This is the port range for port2"
+}
+
+variable "port3" {
+  description = "This is the port range for port3"
+}
