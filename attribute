@@ -1,0 +1,32 @@
+provider "aws" {
+  region = "us-east-1" 
+}
+resource "aws_instance" "myfirstec2" {
+  ami           = "ami-00c39f71452c08778"
+  instance_type = "t2.micro"
+  tags = {
+    Name = "my-first-ec2"
+  }
+}
+resource "aws_eip" "lb_second" {
+  instance = aws_instance.myfirstec2.id
+  domain   = "vpc"
+  tags = {
+    Name = "my-second-eip"
+  }
+}
+resource "aws_security_group" "terraform_firewall_second" {
+  name        = "terraform_firewall"
+  description = "Managed from terraform"
+  tags = {
+    Name = "terraform_firewall"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "terraform_firewall_second" {
+  security_group_id = aws_security_group.terraform_firewall_second.id
+  cidr_ipv4         = "${aws_eip.lb_second.public_ip}/32"
+  from_port         = 80
+  ip_protocol       = "tcp"
+  to_port           = 80
+}
