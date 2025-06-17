@@ -2,7 +2,7 @@ provider "aws" {
   region     = "us-east-1"
 }
 resource "aws_instance" "myec2" {
-    ami = "ami-02e3d076cbd5c28fa"
+    ami = "ami-084568db4383264d4"
     instance_type = "t2.micro"
 
     tags = {
@@ -10,6 +10,6 @@ resource "aws_instance" "myec2" {
     }
 
     lifecycle {
-        create_before_destroy = true
+        ignore_changes = [ instance_type ]
     }
 }
